@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍽️ Epicurean | Luxury Recipe Finder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="luxury-loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <p>Curating Culinary Excellence...</p>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="luxury-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <span>Epicurean</span>
+            </div>
+            <div class="nav-links">
+                <button class="nav-btn active" onclick="showTab('search')">
+                    <i class="fas fa-search"></i> Discover
+                </button>
+                <button class="nav-btn" onclick="showTab('favorites')">
+                    <i class="fas fa-heart"></i> Favorites
+                </button>
+                <button class="nav-btn" onclick="showTab('shopping')">
+                    <i class="fas fa-shopping-bag"></i> List
+                </button>
+            </div>
+            <div class="auth-badge">
+                <i class="fas fa-gem"></i>
+                <span>Luxury Collection</span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- SEARCH TAB -->
+        <div id="searchTab" class="tab-content active">
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="gold-text">Culinary</span> 
+                        <span>Masterpieces</span>
+                    </h1>
+                    <p class="hero-subtitle">Discover extraordinary recipes crafted by world-renowned chefs</p>
+                </div>
+            </section>
+
+            <section class="filters-section">
+                <div class="filters-card">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search any ingredient... (chicken, salmon, pasta, pizza)">
+                        <button id="searchBtn" class="btn-primary">
+                            <span>Explore</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <div class="filter-item">
+                            <label><i class="fas fa-leaf"></i> Diet</label>
+                            <select id="dietSelect">
+                                <option value="">Any Diet</option>
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="vegan">Vegan</option>
+                                <option value="gluten free">Gluten Free</option>
+                                <option value="ketogenic">Keto</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-item">
+                            <label><i class="fas fa-globe"></i> Cuisine</label>
+                            <select id="cuisineSelect">
+                                <option value="">Any Cuisine</option>
+                                <option value="italian">Italian</option>
+                                <option value="asian">Asian</option>
+                                <option value="mexican">Mexican</option>
+                                <option value="mediterranean">Mediterranean</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-item">
+                            <label><i class="fas fa-clock"></i> Max Time</label>
+                            <select id="timeSelect">
+                                <option value="30">30 min</option>
+                                <option value="60">60 min</option>
+                                <option value="90">90 min</option>
+                                <option value="120">120 min</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="results-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-fire"></i> Curated Selections</h2>
+                    <span id="resultCount" class="result-badge"></span>
+                </div>
+                <div id="recipesGrid" class="recipes-grid"></div>
+            </section>
+        </div>
+
+        <!-- FAVORITES TAB -->
+        <div id="favoritesTab" class="tab-content">
+            <section class="saved-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-heart"></i> Your Private Collection</h2>
+                    <p class="section-subtitle">Curated dishes you've saved</p>
+                </div>
+                <div id="favoritesGrid" class="recipes-grid"></div>
+            </section>
+        </div>
+
+        <!-- SHOPPING TAB -->
+        <div id="shoppingTab" class="tab-content">
+            <section class="shopping-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-shopping-bag"></i> Shopping List</h2>
+                    <p class="section-subtitle">Organize your premium ingredients</p>
+                </div>
+                
+                <div class="shopping-card">
+                    <div class="add-item-form">
+                        <input type="text" id="itemName" placeholder="Add ingredient...">
+                        <input type="number" id="itemQuantity" placeholder="Qty" value="1">
+                        <select id="itemUnit">
+                            <option value="piece">pcs</option>
+                            <option value="g">g</option>
+                            <option value="kg">kg</option>
+                            <option value="ml">ml</option>
+                            <option value="tbsp">tbsp</option>
+                        </select>
+                        <button id="addItemBtn" class="btn-primary">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                    
+                    <div id="shoppingList" class="shopping-list"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Recipe Detail Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
